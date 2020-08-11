@@ -1,8 +1,13 @@
 <html>
     <head>
         <style>
+         :root {
+             --gap-color: coral;
+         }
+
          body {
              font-family: IBM Plex Sans;
+             margin: 0;
          }
 
          #controls {
@@ -30,34 +35,64 @@
          .kid {
              width: 100%;
              height: 100%;
-             background: blue;
+             background: #cc86ef;
          }
 
          #width-line {
              height: 100%;
              position: absolute;
-             left: 0;
+             left: 30px;
              top: 0;
-             width: 8px;
+             width: 4px;
              background: pink;
+         }
+         #width-line:hover {
+             outline: 2px solid pink;
+         }
+
+         #width-line2 {
+             height: 100%;
+             position: absolute;
+             left: 90px;
+             top: 0;
+             width: 4px;
+             background: #4ad;
+         }
+         #width-line2:hover {
+             outline: 2px solid #4ad;
          }
 
          #height-line {
              width: 100%;
              position: absolute;
              left: 0;
-             top: 0;
-             height: 8px;
+             top: 30px;
+             height: 4px;
              background: #777;
+         }
+
+         #height-line:hover {
+             outline: 2px solid #777;
          }
 
          #gap-line {
              width: 100%;
              position: absolute;
              left: 0;
-             top: 40px;
-             height: 8px;
-             background: #eee;
+             top: 32px;
+             cursor: ns-resize;
+             opacity: 0;
+         }
+         #gap-line:after {
+             content: "";
+             position: absolute;
+             background: var(--gap-color);
+             width: 100%;
+             height: 30px;
+         }
+         #gap-line:hover {
+             background: var(--gap-color);
+             opacity: .5;
          }
         </style>
     </head>
@@ -73,6 +108,7 @@
         </div>
 
         <div id="width-line"></div>
+        <div id="width-line2"></div>
         <div id="height-line"></div>
 
         <div id="gap-line"></div>

@@ -176,7 +176,6 @@ heightLine.onmousedown = function(e) {
   };
 }
 
-
 const gapLine = document.querySelector("#gap-line")
 gapLine.onmousedown = function(e) {
   e = e || window.event;
@@ -184,6 +183,8 @@ gapLine.onmousedown = function(e) {
 
   if (e.pageY) start = e.pageY;
   else if (e.clientY) start = e.clientY;
+
+  // start = start - heightState.value;
 
   document.body.onmousemove = function(e) {
     e = e || window.event;
@@ -194,13 +195,45 @@ gapLine.onmousedown = function(e) {
 
     // diff = end - start;
     diff = end;
-    nextGap(diff)
-    gapLine.style.top = Number(diff + heightState.value) + "px";
+    nextGap(diff);
+    gapLine.style.top = (heightState.value * 2 + diff) + "px";
+    gapLine.style.height = diff + "px";
   };
 
   document.body.onmouseup = function() {
     // do something with the action here
     // gapLine has been moved by diff pixels in the X axis
+    document.body.onmousemove = document.body.onmouseup = null;
+  };
+}
+
+
+const widthLine2 = document.querySelector("#width-line2")
+widthLine2.onmousedown = function(e) {
+  e = e || window.event;
+  let start = 0, diff = 0;
+
+  if (e.pageX) start = e.pageX;
+  else if (e.clientX) start = e.clientX;
+
+  let _width = widthState.value
+
+  document.body.onmousemove = function(e) {
+    e = e || window.event;
+
+    var end = 0;
+    if (e.pageX) end = e.pageX;
+    else if (e.clientX) end = e.clientX;
+
+    // diff = end - start;
+    diff = end;
+    nextWidth((diff - gapState.value) / 2)
+    widthLine2.style.left = diff + "px";
+  };
+
+  document.body.onmouseup = function() {
+    // do something with the action here
+    // widthLine has been moved by diff pixels in the X axis
     document.body.onmousemove = document.body.onmouseup = null;
   };
 }
