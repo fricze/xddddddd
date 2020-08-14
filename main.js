@@ -122,18 +122,10 @@ const nextGap = _nextFrame(gapState, gapInput, setGap)
 
 const widthLine = document.querySelector("#width-line")
 widthLine.onmousedown = function(e) {
-  e = e || window.event;
-  let start = 0, diff = 0;
-
-  if (e.pageX) start = e.pageX;
-  else if (e.clientX) start = e.clientX;
+  let start = e.clientX, diff = 0;
 
   document.body.onmousemove = function(e) {
-    e = e || window.event;
-
-    var end = 0;
-    if (e.pageX) end = e.pageX;
-    else if (e.clientX) end = e.clientX;
+    const end = e.clientX;
 
     // diff = end - start;
     diff = end;
@@ -150,23 +142,17 @@ widthLine.onmousedown = function(e) {
 
 const heightLine = document.querySelector("#height-line")
 heightLine.onmousedown = function(e) {
-  e = e || window.event;
-  let start = 0, diff = 0;
-
-  if (e.pageY) start = e.pageY;
-  else if (e.clientY) start = e.clientY;
+  let start = e.clientY, diff = 0,
+      valueStart = heightState.value;
 
   document.body.onmousemove = function(e) {
-    e = e || window.event;
+    const end = e.clientY;
 
-    var end = 0;
-    if (e.pageY) end = e.pageY;
-    else if (e.clientY) end = e.clientY;
+    diff = end - start;
+    const value = valueStart + diff
 
-    // diff = end - start;
-    diff = end;
-    nextHeight(diff)
-    heightLine.style.top = diff + "px";
+    nextHeight(value)
+    heightLine.style.top = value + "px";
   };
 
   document.body.onmouseup = function() {
@@ -178,26 +164,19 @@ heightLine.onmousedown = function(e) {
 
 const gapLine = document.querySelector("#gap-line")
 gapLine.onmousedown = function(e) {
-  e = e || window.event;
-  let start = 0, diff = 0;
-
-  if (e.pageY) start = e.pageY;
-  else if (e.clientY) start = e.clientY;
-
-  // start = start - heightState.value;
+  let valueStart = gapState.value
+  let start = e.clientY, diff = 0;
 
   document.body.onmousemove = function(e) {
-    e = e || window.event;
+    const end = e.clientY;
 
-    var end = 0;
-    if (e.pageY) end = e.pageY;
-    else if (e.clientY) end = e.clientY;
+    diff = end - start;
+    const value = valueStart + diff
 
-    // diff = end - start;
-    diff = end;
-    nextGap(diff);
-    gapLine.style.top = (heightState.value * 2 + diff) + "px";
-    gapLine.style.height = diff + "px";
+    nextGap(value);
+
+    gapLine.style.top = (heightState.value * 2 + value) + "px";
+    gapLine.style.height = value + "px";
   };
 
   document.body.onmouseup = function() {
@@ -210,20 +189,14 @@ gapLine.onmousedown = function(e) {
 
 const widthLine2 = document.querySelector("#width-line2")
 widthLine2.onmousedown = function(e) {
-  e = e || window.event;
   let start = 0, diff = 0;
 
-  if (e.pageX) start = e.pageX;
-  else if (e.clientX) start = e.clientX;
+  start = e.clientX;
 
   let _width = widthState.value
 
   document.body.onmousemove = function(e) {
-    e = e || window.event;
-
-    var end = 0;
-    if (e.pageX) end = e.pageX;
-    else if (e.clientX) end = e.clientX;
+    const end = e.clientX;
 
     // diff = end - start;
     diff = end;
