@@ -123,14 +123,16 @@ const nextGap = _nextFrame(gapState, gapInput, setGap)
 const widthLine = document.querySelector("#width-line")
 widthLine.onmousedown = function(e) {
   let start = e.clientX, diff = 0;
+  let valueStart = (widthState.value * 1) + (gapState.value * 0)
 
   document.body.onmousemove = function(e) {
     const end = e.clientX;
 
-    // diff = end - start;
-    diff = end;
-    nextWidth(diff)
-    widthLine.style.left = diff + "px";
+    diff = end - start;
+    const value = valueStart + diff
+
+    nextWidth(value)
+    widthLine.style.left = value + "px";
   };
 
   document.body.onmouseup = function() {
@@ -189,19 +191,17 @@ gapLine.onmousedown = function(e) {
 
 const widthLine2 = document.querySelector("#width-line2")
 widthLine2.onmousedown = function(e) {
-  let start = 0, diff = 0;
-
-  start = e.clientX;
-
-  let _width = widthState.value
+  let start = e.clientX, diff = 0;
+  let valueStart = (widthState.value * 2) + gapState.value
 
   document.body.onmousemove = function(e) {
     const end = e.clientX;
 
-    // diff = end - start;
-    diff = end;
-    nextWidth((diff - gapState.value) / 2)
-    widthLine2.style.left = diff + "px";
+    diff = end - start;
+    const value = valueStart + diff
+
+    nextWidth((value - gapState.value) / 2)
+    widthLine2.style.left = value + "px";
   };
 
   document.body.onmouseup = function() {
