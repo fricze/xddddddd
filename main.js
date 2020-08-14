@@ -173,6 +173,8 @@ gapLine.onmousedown = function(e) {
     const end = e.clientY;
 
     diff = end - start;
+    const rem = diff % 10
+    diff = diff - rem
     const value = valueStart + diff
 
     nextGap(value);
